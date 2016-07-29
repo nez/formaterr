@@ -65,7 +65,7 @@
   "Transform a csv string into a relation"
   [s]
   (let [csv (parse-csv s)
-        head (map keyword (first csv))
+        head (map standard-keyword (first csv))
         tail (rest csv)]
     (map #(zipmap head %) tail)))
 
@@ -98,7 +98,7 @@
   ([o]
    (if (string? o)
      (json/read-str o
-                    :key-fn keyword)
+                    :key-fn standard-keyword)
      (json/write-str o)))
   ([file o]
    (spit file (json o))))
