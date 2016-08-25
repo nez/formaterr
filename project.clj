@@ -9,5 +9,6 @@
                  [http-kit "2.1.18"]
                  [org.clojure/data.json "0.2.6"]
                  [com.outpace/clj-excel "0.0.9"]
-                 [digitalize "0.1.0-SNAPSHOT"]]
+                 [digitalize "0.1.0-SNAPSHOT"]
+                 [org.clojars.hozumi/clj-det-enc "1.0.0-SNAPSHOT"]]
   :repl-options {:init-ns formaterr.core})

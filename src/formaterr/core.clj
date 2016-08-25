@@ -3,7 +3,9 @@
   (:require [clj-excel.core :refer :all]
             [clojure.data.json :as json]
             [clojure.string :as s]
-            [digitalize.core :refer :all]))
+            [clojure-csv.core :refer :all]
+            [digitalize.core :refer :all]
+            [hozumi.det-enc :refer :all]))
 
 (defn all-keys [rel]
   (distinct (flatten (map keys rel))))
@@ -78,7 +80,7 @@
     (map #(zipmap head %) tail)))
 
 (defn parse-csv-file
-  [file-name] (parse-csv-str (slurp file-name)))
+  [file-name] (parse-csv-str (slurp file-name :encoding (detect file-name))))
 
 (defn keyword-str [o]
   (keyword (str o)))
