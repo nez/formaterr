@@ -10,3 +10,8 @@ pom.xml.asc
 *~
 *#
 .#*
+*.csv
+*.tsv
+*.psv
+*.xls*
+test.*
