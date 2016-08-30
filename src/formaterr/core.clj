@@ -63,19 +63,27 @@
     (map #(zipmap head %)
          (rest vecs))))
 
+;;elimina solo las que no tienen. seria mejor quitar todas las que tienen menos q el max?
+(defn remove-lines-without-delimiter
+  [colls]
+  (if (apply = (map count colls))
+    colls
+    (remove #(= 1 (count %)) colls)))
+
+(defn parse-sv-str
+  "Transform a char separated value string into a relation"
+  [s delimiter]
+  (let [csv (remove-lines-without-delimiter
+             (parse-csv s :delimiter delimiter))
+        head (map standard-keyword (first csv))
+        tail (rest csv)]
+    (map #(zipmap head %) tail)))
+
 (defn parse-csv-str
   "Transform a csv string into a relation"
   [s]
   (let [csv (parse-csv s)
         head (map standard-keyword (first csv))
-        tail (rest csv)]
-    (map #(zipmap head %) tail)))
-
-(defn parse-tsv-str
-  "Transform a TSV string into a relation"
-  [s]
-  (let [csv (parse-csv s :delimiter \tab)
-        head (map keyword (first csv))
         tail (rest csv)]
     (map #(zipmap head %) tail)))
 
@@ -85,16 +93,26 @@
 (defn keyword-str [o]
   (keyword (str o)))
 
+(defn parse-sv
+  [file separator]
+  (parse-sv-str (slurp file :encoding (detect file))
+                separator))
 
 (defn csv
-  ([file-name] (parse-csv-file file-name))
-  ([file-name data]
-    (csv file-name data (all-keys data)))
-  ([file-name data head]
-   (spit file-name (csv-str data head))))
+  ([file]
+   (parse-sv file \,))
+  ([file data]
+    (csv file data (all-keys data)))
+  ([file data head]
+   (spit file (csv-str data head))))
 
 (defn tsv
-  ([file-name] (parse-tsv-str (slurp file-name))))
+  ([file]
+   (parse-sv file \tab)))
+
+(defn psv
+  ([file]
+   (parse-sv file \|)))
 
 (defn json
   ([o]
