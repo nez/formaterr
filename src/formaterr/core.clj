@@ -34,6 +34,13 @@
                ))))
 )
 
+(defn maps->vecs
+  [rel]
+  (let [head (all-keys rel)]
+    (map #(map str %)
+         (concat [(map name head)]
+                 (map #(map % head)
+                      rel)))))
 (defn csv-str
   "Transform a relation into csv string"
   ([coll] (csv-str coll (all-keys coll)))
@@ -143,5 +150,11 @@
                 [(cond (string? frst) :string)
                  (count args)]))
 
+;; Read xls
 (defmethod xls [:string 0] [frst & args]
   (flatten (digitalize (map vecs->maps (-> frst workbook-hssf lazy-workbook vals)))))
+
+;; Write xls
+(defmethod xls [:string 1] [file data]
+  (-> (build-workbook (workbook-hssf) {"Numbers" (maps->vecs data)})
+      (save file)))
