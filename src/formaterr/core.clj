@@ -158,3 +158,6 @@
 (defmethod xls [:string 1] [file data]
   (-> (build-workbook (workbook-hssf) {"Numbers" (maps->vecs data)})
       (save file)))
+
+(defn slurp-head [f]
+  (re-find #"[^\n]+" (slurp f)))
