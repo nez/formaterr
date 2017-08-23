@@ -1,5 +1,4 @@
 (ns formaterr.core
-  (:use clojure-csv.core)
   (:require [clj-excel.core :refer :all]
             [clojure.data.json :as json]
             [clojure.string :as s]
