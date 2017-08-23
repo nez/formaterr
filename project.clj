@@ -1,6 +1,6 @@
 (defproject formaterr "1.0.0-SNAPSHOT"
   :description "Download, parse and write files in various formats"
-  :url "https://github.com/fractalLabs/formaterr"
+  :url "https://github.com/nez/formaterr"
   :license {:name "Eclipse Public License"
             :url "http://www.eclipse.org/legal/epl-v10.html"}
   :dependencies [[org.clojure/clojure "1.8.0"]
