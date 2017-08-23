@@ -20,8 +20,10 @@
 (defn copy
   "Copy a web resource to a file"
   [url file]
-  (io/copy (download url)
-           (java.io.File. file)))
+  (try
+    (io/copy (download url)
+             (java.io.File. file))
+    (catch Exception e (println "Exception copying: " url))))
 
 (defn all-keys [rel]
   (distinct (flatten (map keys rel))))
