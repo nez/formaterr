@@ -38,7 +38,7 @@
   (count (filter (partial = k) coll)))
 
 (defn keyword-correspondiente [k n]
-  (if (= n 0)
+  (if (zero? n)
       k
       (keyword (str (name k) "-" n))))
 
@@ -172,8 +172,8 @@
 
 ;; Write xls
 (defmethod xls [:string 1] [file data]
-  (-> (build-workbook (workbook-hssf) {"Numbers" (maps->vecs data)})
-      (save file)))
+  (save (build-workbook (workbook-hssf) {"Numbers" (maps->vecs data)})
+        file))
 
 (defn slurp-head [f]
   (re-find #"[^\n]+" (slurp f)))
