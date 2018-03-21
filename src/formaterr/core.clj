@@ -5,8 +5,8 @@
             [clojure-csv.core :refer :all]
             [digitalize.core :refer :all]
             [org.httpkit.client :as http]
-            [hozumi.det-enc :refer :all]
-            [clojure.java.io :as io]))
+            [clojure.java.io :as io]
+            [formaterr.encoding :refer :all]))
 
 
 (defn download
