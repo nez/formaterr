@@ -10,5 +10,5 @@
                  [org.clojure/data.json "0.2.6"]
                  [com.outpace/clj-excel "0.0.9"]
                  [digitalize "0.1.0-SNAPSHOT"]
-                 [com.googlecode.juniversalchardet/juniversalchardet "1.0.3"]]
+                 [org.clojars.smallrivers/juniversalchardet "1.0.3"]]
   :repl-options {:init-ns formaterr.core})
