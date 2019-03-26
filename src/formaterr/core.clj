@@ -4,6 +4,7 @@
             [clojure.string :as s]
             [clojure-csv.core :refer :all]
             [digitalize.core :refer :all]
+            [digitalize.strings :refer :all]
             [org.httpkit.client :as http]
             [clojure.java.io :as io]
             [formaterr.encoding :refer :all]))

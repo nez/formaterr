@@ -1,5 +1,6 @@
 (ns formaterr.encoding
-  (:use [digitalize.core :refer :all])
+  (:use [digitalize.core :refer :all]
+        [digitalize.strings :refer :all])
   (:require [clojure.java.io :as io]))
 
 (def conversions
