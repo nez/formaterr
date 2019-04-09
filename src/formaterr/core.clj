@@ -1,11 +1,11 @@
 (ns formaterr.core
   (:require [clj-excel.core :refer :all]
+            [clj-http.client :as http]
             [clojure.data.json :as json]
             [clojure.string :as s]
             [clojure-csv.core :refer :all]
             [digitalize.core :refer :all]
             [digitalize.strings :refer :all]
-            [org.httpkit.client :as http]
             [clojure.java.io :as io]
             [formaterr.encoding :refer :all]))
 
@@ -16,7 +16,9 @@
   (println "Downloading: " url)
   (:body @(http/get url {:as :auto
                          :insecure? true ; Needed to contact a server with an untrusted SSL cert
-                         :user-agent "Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/41.0.2228.0 Safari/537.36"})))
+                         :user-agent "Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/41.0.2228.0 Safari/537.36"
+                         :follow-redirects true
+                         :max-redirects 10})))
 
 (defn copy
   "Copy a web resource to a file"
