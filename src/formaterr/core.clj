@@ -9,16 +9,19 @@
             [clojure.java.io :as io]
             [formaterr.encoding :refer :all]))
 
-
 (defn download
   "Download a web resource"
   [url]
   (println "Downloading: " url)
-  (:body @(http/get url {:as :auto
-                         :insecure? true ; Needed to contact a server with an untrusted SSL cert
-                         :user-agent "Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/41.0.2228.0 Safari/537.36"
-                         :follow-redirects true
-                         :max-redirects 10})))
+  (let [req (http/get url {:as :auto
+                           :insecure? true ; Needed to contact a server with an untrusted SSL cert
+                           :user-agent "Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/41.0.2228.0 Safari/537.36"
+                           :follow-redirects true
+                           :max-redirects 10})
+        status (:status req)]
+    (if (< status 400) ; ojo: esto acepta codigos 200, 300
+      (:body req)
+      (throw (Exception. (str status))))))
 
 (defn copy
   "Copy a web resource to a file"
