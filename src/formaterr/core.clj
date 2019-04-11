@@ -16,8 +16,9 @@
   (let [req (http/get url {:as :auto
                            :insecure? true ; Needed to contact a server with an untrusted SSL cert
                            :user-agent "Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/41.0.2228.0 Safari/537.36"
-                           :follow-redirects true
-                           :max-redirects 10})
+                           :max-redirects 10
+                           :conn-timeout 10000
+                           :socket-timeout 10000})
         status (:status req)]
     (if (< status 400) ; ojo: esto acepta codigos 200, 300
       (:body req)
