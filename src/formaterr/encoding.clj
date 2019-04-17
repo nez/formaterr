@@ -42,12 +42,11 @@
 (defn- judge-seq! [buf ^java.io.InputStream istream
                    ^org.mozilla.universalchardet.UniversalDetector detector]
   (let [n        (.read istream buf)
-        proceed? (and (< 0 n)
+        proceed? (and (pos? n)
                       (not (do (.handleData detector buf 0 n)
                                (.isDone detector))))]
-    (if proceed?
-      (recur buf istream detector)
-      nil)))
+    (when proceed?
+      (recur buf istream detector))))
 
 (defn detect
   ([target]
