@@ -9,6 +9,6 @@
                  [clojure-csv "2.0.2"]
                  [org.clojure/data.json "0.2.6"]
                  [com.outpace/clj-excel "0.0.9"]
-                 [digitalize "0.1.0-SNAPSHOT"]
+                 [digitalize "0.1.1-SNAPSHOT"]
                  [org.clojars.smallrivers/juniversalchardet "1.0.3"]]
   :repl-options {:init-ns formaterr.core})
