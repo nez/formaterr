@@ -109,7 +109,7 @@
              (parse-csv s :delimiter delimiter))
         head (map standard-keyword (first csv))
         tail (rest csv)]
-    (map #(zipmap head %) tail)))
+    (pmap #(zipmap head %) tail)))
 
 (defn parse-csv-str
   "Transform a csv string into a relation"
@@ -117,7 +117,7 @@
   (let [csv (parse-csv s)
         head (map standard-keyword (first csv))
         tail (rest csv)]
-    (map #(zipmap head %) tail)))
+    (pmap #(zipmap head %) tail)))
 
 (defn parse-csv-file
   [file-name] (parse-csv-str (slurp file-name :encoding (detect file-name))))
